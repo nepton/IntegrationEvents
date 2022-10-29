@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageId>IntegrationEvents</PackageId>
+        <PackageId>IntegrationEvents.Abstractions</PackageId>
         <Description>Integration event bus for comm across microservices</Description>
         <PackageTags>integration;event;bus;microservices</PackageTags>
         <PackageProjectUrl>https://github.com/nepton/IntegraionEvents</PackageProjectUrl>

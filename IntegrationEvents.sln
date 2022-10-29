@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D89EE3E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEvents.RabbitMq", "src\IntegrationEvents.RabbitMq\IntegrationEvents.RabbitMq.csproj", "{EA34BFD1-6DBD-4B0E-8CCE-044F69D7069F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEvents", "src\IntegrationEvents\IntegrationEvents.csproj", "{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEvents.Abstractions", "src\IntegrationEvents.Abstractions\IntegrationEvents.Abstractions.csproj", "{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

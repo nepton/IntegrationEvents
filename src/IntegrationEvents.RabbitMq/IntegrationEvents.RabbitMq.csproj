@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IntegrationEvents\IntegrationEvents.csproj" />
+    <ProjectReference Include="..\IntegrationEvents.Abstractions\IntegrationEvents.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
