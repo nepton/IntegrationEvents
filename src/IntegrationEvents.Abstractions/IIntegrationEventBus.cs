@@ -1,9 +1,10 @@
 ﻿namespace IntegrationEvents;
 
+
 /// <summary>
 /// Interface to the event bus
 /// </summary>
-public interface IEventBus
+public interface IIntegrationEventBus
 {
     /// <summary>
     /// Publishes the specified event.

@@ -14,7 +14,7 @@ using RabbitMQ.Client.Exceptions;
 
 namespace IntegrationEvents.RabbitMq;
 
-public class RabbitMqEventBus : IEventBus, IDisposable
+public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
 {
     private readonly IRabbitMqPersistentConnection _persistentConnection;
     private readonly ILogger<RabbitMqEventBus>     _logger;

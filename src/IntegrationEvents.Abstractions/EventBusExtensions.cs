@@ -7,7 +7,7 @@ public static class EventBusExtensions
     /// </summary>
     /// <typeparam name="TEvent"></typeparam>
     /// <typeparam name="TEventHandler"></typeparam>
-    public static void Subscribe<TEvent, TEventHandler>(this IEventBus source) where TEvent : IntegrationEvent where TEventHandler : IIntegrationEventHandler<TEvent>
+    public static void Subscribe<TEvent, TEventHandler>(this IIntegrationEventBus source) where TEvent : IntegrationEvent where TEventHandler : IIntegrationEventHandler<TEvent>
     {
         source.Subscribe(typeof(TEvent), typeof(TEventHandler));
     }
@@ -16,7 +16,7 @@ public static class EventBusExtensions
     /// Simplify the subscription process
     /// </summary>
     /// <typeparam name="TEvent"></typeparam>
-    public static void Subscribe<TEvent>(this IEventBus source) where TEvent : IntegrationEvent
+    public static void Subscribe<TEvent>(this IIntegrationEventBus source) where TEvent : IntegrationEvent
     {
         source.Subscribe(typeof(TEvent), typeof(IIntegrationEventHandler<>).MakeGenericType(typeof(TEvent)));
     }
@@ -26,7 +26,7 @@ public static class EventBusExtensions
     /// </summary>
     /// <typeparam name="TEvent"></typeparam>
     /// <typeparam name="TEventHandler"></typeparam>
-    public static void Unsubscribe<TEvent, TEventHandler>(this IEventBus source) where TEventHandler : IIntegrationEventHandler<TEvent> where TEvent : IntegrationEvent
+    public static void Unsubscribe<TEvent, TEventHandler>(this IIntegrationEventBus source) where TEventHandler : IIntegrationEventHandler<TEvent> where TEvent : IntegrationEvent
     {
         source.Unsubscribe(typeof(TEvent), typeof(TEventHandler));
     }
