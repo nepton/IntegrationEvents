@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IntegrationEvents;
+namespace IntegrationEvents.RabbitMq;
 
 public class SubscriptionInfo
 {

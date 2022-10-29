@@ -10,17 +10,17 @@ the [Integration Events](https://microservices.io/patterns/data/transactional-ou
 
 ## Nuget packages
 
-| Name                           | Version                                                                                                                                       | Downloads                                                                                                                                      |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| IntegrationEvents.Abstractions | [![nuget](https://img.shields.io/nuget/v/IntegrationEvents.Abstractions.svg)](https://www.nuget.org/packages/IntegrationEvents.Abstractions/) | [![stats](https://img.shields.io/nuget/dt/IntegrationEvents.Abstractions.svg)](https://www.nuget.org/packages/IntegrationEvents.Abstractions/) |
-| IntegrationEvents.RabbitMq     | [![nuget](https://img.shields.io/nuget/v/IntegrationEvents.RabbitMq.svg)](https://www.nuget.org/packages/IntegrationEvents.RabbitMq/)         | [![stats](https://img.shields.io/nuget/dt/IntegrationEvents.RabbitMq.svg)](https://www.nuget.org/packages/IntegrationEvents.RabbitMq/)         |
+| Name                       | Version                                                                                                                               | Downloads                                                                                                                              |
+|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| IntegrationEvents          | [![nuget](https://img.shields.io/nuget/v/IntegrationEvents.svg)](https://www.nuget.org/packages/IntegrationEvents/)                   | [![stats](https://img.shields.io/nuget/dt/IntegrationEvents.svg)](https://www.nuget.org/packages/IntegrationEvents/)                   |
+| IntegrationEvents.RabbitMq | [![nuget](https://img.shields.io/nuget/v/IntegrationEvents.RabbitMq.svg)](https://www.nuget.org/packages/IntegrationEvents.RabbitMq/) | [![stats](https://img.shields.io/nuget/dt/IntegrationEvents.RabbitMq.svg)](https://www.nuget.org/packages/IntegrationEvents.RabbitMq/) |
 
 ## Installation
 
 Add following nuget reference in business project:
 
 ```
-PM> Install-Package IntegrationEvents.Abstractions
+PM> Install-Package IntegrationEvents
 ```
 
 And add following nuget reference in integration project:

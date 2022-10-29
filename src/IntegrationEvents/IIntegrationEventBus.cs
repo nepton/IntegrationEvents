@@ -1,6 +1,5 @@
 ﻿namespace IntegrationEvents;
 
-
 /// <summary>
 /// Interface to the event bus
 /// </summary>

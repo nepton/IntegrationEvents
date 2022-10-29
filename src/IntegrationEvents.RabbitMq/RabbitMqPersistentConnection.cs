@@ -9,16 +9,14 @@ using RabbitMQ.Client.Exceptions;
 
 namespace IntegrationEvents.RabbitMq;
 
-public class RabbitMqPersistentConnection
-    : IRabbitMqPersistentConnection
+public class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 {
     private readonly IConnectionFactory                    _connectionFactory;
     private readonly ILogger<RabbitMqPersistentConnection> _logger;
     private readonly int                                   _retryCount;
-    IConnection                                            _connection;
-    bool                                                   _disposed;
-
-    readonly object _syncRoot = new object();
+    private          IConnection                           _connection;
+    private          bool                                  _disposed;
+    private readonly object                                _syncRoot = new();
 
     public RabbitMqPersistentConnection(IConnectionFactory connectionFactory, ILogger<RabbitMqPersistentConnection> logger, int retryCount = 5)
     {

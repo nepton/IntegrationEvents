@@ -12,6 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\readme.md">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+      <Link>readme.md</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IntegrationEvents\IntegrationEvents.csproj" />
   </ItemGroup>
 
