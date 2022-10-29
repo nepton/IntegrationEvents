@@ -25,7 +25,7 @@ before_build:
 
 build_script:
 - cmd: >-
-    dotnet pack .\src\IntegrationEvents -c %TARGET_CONFIGURATION% -p:VersionPrefix=%VERSION%
+    dotnet pack .\src\IntegrationEvents.Abstractions -c %TARGET_CONFIGURATION% -p:VersionPrefix=%VERSION%
     
     dotnet pack .\src\IntegrationEvents.RabbitMq -c %TARGET_CONFIGURATION% -p:VersionPrefix=%VERSION%
 
