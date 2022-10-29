@@ -25,7 +25,6 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
     private          IModel _consumerChannel;
     private          string _queueName;
     private readonly string _brokerName;
-    private readonly string _brokerNameDelayed;
 
     public RabbitMqEventBus(
         IRabbitMqPersistentConnection persistentConnection,
@@ -40,7 +39,6 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
         _logger               = logger ?? throw new ArgumentNullException(nameof(logger));
         _serviceProvider      = serviceProvider;
         _brokerName           = brokerName;
-        _brokerNameDelayed    = $"{brokerName}.delayed"; // 延迟消息的处理 broker
         _subsManager          = subsManager ?? new InMemoryEventBusSubscriptionsManager();
         _queueName            = queueName;
         _consumerChannel      = CreateConsumerChannel();
@@ -98,46 +96,6 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
             _logger.LogTrace("Creating RabbitMQ channel to publish event: {EventId} ({EventName})", e.Id, eventName);
             using var channel = _persistentConnection.CreateModel();
 
-            // Processing delayed messages
-            if (e is DelayedIntegrationEvent de)
-            {
-                // You need to install https://github.com/rabbitmq/rabbitmq-delayed-message-exchange Plug-in, and there is a 20% performance degradation
-                _logger.LogTrace("Declaring RabbitMQ delayed exchange to publish event: {EventId}", e.Id);
-
-                channel.ExchangeDeclare(exchange: _brokerNameDelayed,
-                    type: "x-delayed-message",
-                    durable: true,
-                    autoDelete: false,
-                    arguments: new Dictionary<string, object>
-                    {
-                        {"x-delayed-type", "direct"}
-                    });
-
-                var delayProperties = channel.CreateBasicProperties();
-                delayProperties.DeliveryMode = 2; // persistent
-                delayProperties.Headers = new Dictionary<string, object>
-                {
-                    {"x-delay", de.DelayInSec * 1000}
-                };
-
-                using (_logger.BeginScope(new Dictionary<string, object>
-                       {
-                           ["@PublishingEvent"] = de,
-                       }))
-                {
-                    _logger.LogInformation("Publishing delayed event {PublishingEventName} ({PublishingEventId}) to RabbitMQ", eventName, e.Id);
-                }
-
-                channel.BasicPublish(
-                    exchange: _brokerNameDelayed,
-                    routingKey: eventName,
-                    mandatory: true,
-                    basicProperties: delayProperties,
-                    body: body);
-
-                return;
-            }
-
             _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", e.Id);
             channel.ExchangeDeclare(exchange: _brokerName, type: "direct");
 
@@ -169,7 +127,7 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
     public void Subscribe(Type eventType, Type eventHandlerType)
     {
         var eventName = _subsManager.GetEventName(eventType);
-        DoInternalSubscription(eventName, eventType.IsAssignableTo(typeof(DelayedIntegrationEvent)));
+        DoInternalSubscription(eventName);
 
         _logger.LogInformation("Subscribing to event {EventName} with {EventHandler}", eventName, eventHandlerType.GetGenericTypeName());
 
@@ -177,7 +135,7 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
         StartBasicConsume();
     }
 
-    private void DoInternalSubscription(string eventName, bool delayedEvent)
+    private void DoInternalSubscription(string eventName)
     {
         var containsKey = _subsManager.HasSubscriptionsForEvent(eventName);
         if (!containsKey)
@@ -189,7 +147,7 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
 
             // 延迟消息处理
             _consumerChannel.QueueBind(queue: _queueName,
-                exchange: delayedEvent ? _brokerNameDelayed : _brokerName,
+                exchange: _brokerName,
                 routingKey: eventName);
         }
     }
@@ -268,15 +226,7 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
         // 声明交换机, 否则 bind queue 的时候会 404
         channel.ExchangeDeclare(exchange: _brokerName,
             type: "direct");
-        channel.ExchangeDeclare(_brokerNameDelayed,
-            "x-delayed-message",
-            durable: true,
-            autoDelete: false,
-            arguments: new Dictionary<string, object>
-            {
-                {"x-delayed-type", "direct"}
-            });
-
+        
         channel.QueueDeclare(queue: _queueName,
             durable: true,
             exclusive: false,
@@ -325,7 +275,6 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
                 ["HandlingId"]        = $"{eventId}:{handlerId}",
                 ["HandlingEventId"]   = eventId,
                 ["HandlingEventName"] = eventName,
-                ["IsDelayedEvent"]    = integrationEvent is DelayedIntegrationEvent,
             });
 
             if (scope.ServiceProvider.GetService(subscription.HandlerType) is not { } handler)
@@ -373,5 +322,3 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
         _subsManager.Clear();
     }
 }
-
-
