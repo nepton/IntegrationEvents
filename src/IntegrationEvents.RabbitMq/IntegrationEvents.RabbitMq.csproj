@@ -19,8 +19,8 @@
 
   <PropertyGroup>
     <PackageId>IntegrationEvents.RabbitMq</PackageId>
-    <Description>Integration event bus for some hanlding business</Description>
-    <PackageTags>integration;event;bus;microservices;message</PackageTags>
+    <Description>Integration event bus for comm across microservices</Description>
+    <PackageTags>integration;event;bus;microservices</PackageTags>
     <PackageProjectUrl>https://github.com/nepton/IntegrationEvents</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nepton/IntegrationEvents.git</RepositoryUrl>
 
