@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEvents.RabbitMq"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEvents.Abstractions", "src\IntegrationEvents.Abstractions\IntegrationEvents.Abstractions.csproj", "{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest.IntegrationEvents.Abstractions", "tests\UnitTest.IntegrationEvents.Abstractions\UnitTest.IntegrationEvents.Abstractions.csproj", "{E3E9610D-2877-420B-BE09-1FF5841377A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3E9610D-2877-420B-BE09-1FF5841377A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3E9610D-2877-420B-BE09-1FF5841377A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3E9610D-2877-420B-BE09-1FF5841377A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3E9610D-2877-420B-BE09-1FF5841377A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EA34BFD1-6DBD-4B0E-8CCE-044F69D7069F} = {5309EC62-08D3-4CB5-B295-0D389CFBDDA1}
 		{ACEAF76D-54A9-4B0E-B4D7-384F5BBFE82E} = {5309EC62-08D3-4CB5-B295-0D389CFBDDA1}
+		{E3E9610D-2877-420B-BE09-1FF5841377A2} = {D89EE3E4-AABD-439A-A3CB-8EDA27EA32B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CA6DE1A-C1A0-4BE1-B7BF-D3052CD20581}

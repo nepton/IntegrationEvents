@@ -14,26 +14,26 @@ using RabbitMQ.Client.Exceptions;
 
 namespace IntegrationEvents.RabbitMq;
 
-public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
+public class RabbitMqIntegrationEventBus : IIntegrationEventBus, IDisposable
 {
-    private readonly IRabbitMqPersistentConnection _persistentConnection;
-    private readonly ILogger<RabbitMqEventBus>     _logger;
-    private readonly IServiceProvider              _serviceProvider;
-    private readonly IEventBusSubscriptionsManager _subsManager;
-    private readonly int                           _retryCount;
+    private readonly IRabbitMqPersistentConnection        _persistentConnection;
+    private readonly ILogger<RabbitMqIntegrationEventBus> _logger;
+    private readonly IServiceProvider                     _serviceProvider;
+    private readonly IEventBusSubscriptionsManager        _subsManager;
+    private readonly int                                  _retryCount;
 
     private          IModel _consumerChannel;
     private          string _queueName;
     private readonly string _brokerName;
 
-    public RabbitMqEventBus(
-        IRabbitMqPersistentConnection persistentConnection,
-        ILogger<RabbitMqEventBus>     logger,
-        IServiceProvider              serviceProvider,
-        IEventBusSubscriptionsManager subsManager,
-        string                        brokerName,
-        string                        queueName  = null,
-        int                           retryCount = 5)
+    public RabbitMqIntegrationEventBus(
+        IRabbitMqPersistentConnection        persistentConnection,
+        ILogger<RabbitMqIntegrationEventBus> logger,
+        IServiceProvider                     serviceProvider,
+        IEventBusSubscriptionsManager        subsManager,
+        string                               brokerName,
+        string                               queueName  = null,
+        int                                  retryCount = 5)
     {
         _persistentConnection = persistentConnection ?? throw new ArgumentNullException(nameof(persistentConnection));
         _logger               = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -226,7 +226,7 @@ public class RabbitMqEventBus : IIntegrationEventBus, IDisposable
         // 声明交换机, 否则 bind queue 的时候会 404
         channel.ExchangeDeclare(exchange: _brokerName,
             type: "direct");
-        
+
         channel.QueueDeclare(queue: _queueName,
             durable: true,
             exclusive: false,

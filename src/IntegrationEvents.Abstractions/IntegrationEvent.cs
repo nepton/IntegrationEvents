@@ -3,21 +3,21 @@
 /// <summary>
 /// The base class for all integration events.
 /// </summary>
-public abstract class IntegrationEvent
+public record IntegrationEvent
 {
     protected IntegrationEvent()
     {
         Id          = Guid.NewGuid();
-        CreatedTime = DateTime.Now;
+        CreatedTime = DateTime.UtcNow;
     }
 
     /// <summary>
     /// Message Id
     /// </summary>
-    public Guid Id { get; private set; }
+    public Guid Id { get; init; }
 
     /// <summary>
     /// The time when the message was created
     /// </summary>
-    public DateTime CreatedTime { get; private set; }
+    public DateTime CreatedTime { get; init; }
 }

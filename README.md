@@ -20,7 +20,7 @@ the [Integration Events](https://microservices.io/patterns/data/transactional-ou
 Add following nuget reference in business project:
 
 ```
-PM> Install-Package IntegrationEvents
+PM> Install-Package IntegrationEvents.Abstractions
 ```
 
 And add following nuget reference in integration project:
